@@ -15,4 +15,7 @@ class State:
         return self.literals == other.literals
 
     def satisfy(self, conditions):
-        return all(condition in self.literals for condition in conditions)
+        for condition in conditions:
+            if not(condition in self.literals):
+                return False
+        return True
