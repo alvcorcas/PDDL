@@ -1,4 +1,5 @@
 from Action import *
+from State import *
 
 A = Action("A", ['p2'], ['p4'])
 B = Action("B", ['p4'], ['p5'])
@@ -28,3 +29,4 @@ def prego(state, targets):
             result = result + heuristic
     return result
 
+print(prego(State(["p1","p4"]),["p3"]))

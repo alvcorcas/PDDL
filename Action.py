@@ -12,5 +12,5 @@ class Action:
         self.effects = effects
 
     def __repr__(self):
-        return '\nName: ' + self.name + '\nPreconditions: ' + str(self.preconditions) + '\nEffects: ' + str(self.effects) + '\n'
-        
+        #return '\nName: ' + self.name + '\nPreconditions: ' + str(self.preconditions) + '\nEffects: ' + str(self.effects) + '\n'
+        return self.name
