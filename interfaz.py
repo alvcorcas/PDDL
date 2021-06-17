@@ -36,6 +36,20 @@ def cargardatos(datos):
                         action1.effects.append(j)
                 actions.append(action1)
 
+def resultado ():  
+    x2 = entry2.get()
+    x3 = entry3.get()
+    x4 = entry4.get()
+
+    datos.append(x2)
+    datos.append(x3)
+    datos.append(x4)
+    cargardatos(datos)
+    print(prego(initialstate,objective,actions))
+    root.destroy()
+    
+
+
 root= tk.Tk()
 canvas1 = tk.Canvas(root, width = 450, height = 600)
 canvas1.pack()
@@ -49,7 +63,6 @@ entry2.place(x = 20,
         y = 200,
         width=400,
         height=30)
-
 
 
 label3 = tk.Label(root, text='Final state:')
@@ -74,26 +87,15 @@ entry4.place(x = 20,
         height=30)
 
 
-def getSquareRoot ():  
-    lista = []    
-    x2 = entry2.get()
-    x3 = entry3.get()
-    x4 = entry4.get()
 
-    datos.append(x2)
-    datos.append(x3)
-    datos.append(x4)
-    cargardatos(datos)
-    lista= prego(initialstate,objective,actions)
-    print(lista)
+
     
-button1 = tk.Button(text='RUN', command=getSquareRoot)
+button1 = tk.Button(text='RUN', command=resultado)
 canvas1.create_window(40, 500, window=button1)
 
 
 
 root.mainloop()
-
 
 
 

@@ -29,7 +29,7 @@ def prego(state, targets, actions):
             causes = [action for action in actions if target in action.effects]
 
             # Ninguna accion es causa del literal target
-            if (len(cause) == 0):
+            if (len(causes) == 0):
                 result = result + actions
 
             else:
@@ -47,3 +47,7 @@ def prego(state, targets, actions):
 
 s = State(['p1'])
 print(prego(s, ['p1', 'p8', 'p4'], actions))
+
+
+#DuDAD
+#PReguntar la duda de si 
