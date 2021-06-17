@@ -22,6 +22,9 @@ def cargardatos(datos):
         datos[0] = datos[0].replace('\n', '')
         datos[1] = datos[1].replace('\n', '')
         datos[2] = datos[2].replace('\n', '')
+        datos[0] = datos[0].replace(' ', '')
+        datos[1] = datos[1].replace(' ', '')
+        datos[2] = datos[2].replace(' ', '')
 
         
         for i in datos[0].split(","):
@@ -49,6 +52,7 @@ def resultado():
         global objective
         global actions
         global datos
+        global text
         initialstate = State([])
         objective = []
         actions = []
@@ -62,12 +66,16 @@ def resultado():
         cargardatos(datos)
 
         if (chk_state_prego.get()):
+                
+                text['text'] = prego(initialstate,objective,actions)
 
-                text = Label(root, text=prego(initialstate,objective,actions))   
-                text.place(x=100,y=540)
+                print(prego(initialstate,objective,actions))
         else:
-                text = Label(root, text=delta0(initialstate,objective,actions))   
-                text.place(x=100,y=540)
+                text['text'] = delta0(initialstate,objective,actions)
+
+                
+                print(delta0(initialstate,objective,actions))
+
     
 
         
@@ -128,6 +136,9 @@ canvas1.create_window(40, 500, window=button1)
 label5 = tk.Label(root, text='Solution:')
 label5.config(font=('helvetica', 10))
 canvas1.create_window(50, 550, window=label5)
+
+text = Label(root, text="")   
+text.place(x=100,y=540)
 
 root.mainloop()
 

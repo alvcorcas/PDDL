@@ -2,22 +2,18 @@ from Action import *
 from State import *
 import numpy as np
 
-# A = Action("A", ['p1'], ['p5'])
-# B = Action("B", ['p4'], ['p2'])
-# C = Action("C", ['p2'], ['p5'])
-# D = Action("D", ['p1', 'p4', 'p5'], ['p3', 'p7'])
 
 
-A = Action("A", ['p2'], ['p4'])
-B = Action("B", ['p4'], ['p5'])
-C = Action("C", ['p1'], ['p2'])
-D = Action("D", ['p1', 'p4', 'p5'], ['p3'])
-E = Action("E", ['p5', 'p2'], ['p3'])
-F = Action("F", ['p1', 'p5'], ['p3'])
+# A = Action("A", ['p2'], ['p4'])
+# B = Action("B", ['p4'], ['p5'])
+# C = Action("C", ['p1'], ['p2'])
+# D = Action("D", ['p1', 'p4', 'p5'], ['p3'])
+# E = Action("E", ['p5', 'p2'], ['p3'])
+# F = Action("F", ['p1', 'p5'], ['p3'])
 
 # A-p2-p4;B-p4-p5;C-p1-p2;D-p1,p4,p5-p3;E-p5,p2-p3;F-p1,p5-p3
 
-actions = [A, B, C, D, E, F]
+# actions = [A, B, C, D, E, F]
 # print(actions)
 
 
@@ -74,11 +70,12 @@ def delta0(state, targets, actions):
 
 s = State(['p1'])
 
-print(prego(s, ['p1', 'p8', 'p4'], actions))
+# print(prego(s, ['p1', 'p8', 'p4'], actions))
 
-print(delta0(s, ['p5'], actions))
+# print(delta0(s, ['p5'], actions))
 
 
 
 # DuDAD
-# PReguntar la duda de si
+# PReguntar la duda del tema de algoritmo hacia adelante hacia atras
+#Preguntar duda ¿Que hay q devolver?
