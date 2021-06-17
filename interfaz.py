@@ -5,9 +5,9 @@ from Action import *
 from prego import *
 
 
-##El formato para las acciones es A-p2-p4;B-p4-p5;C-p1-p2;D-p1,p4,p5-p3;E-p5,p2-p3;F-p1,p5-p3
-##Es decir NOMBRE-PRECOND-EFECTOS
-##PAra el estado inicial y objetivo, el formato es literales separados por coma
+## El formato para las acciones es A-p2-p4;B-p4-p5;C-p1-p2;D-p1,p4,p5-p3;E-p5,p2-p3;F-p1,p5-p3
+## Es decir NOMBRE-PRECOND-EFECTOS
+## Para el estado inicial y objetivo, el formato es literales separados por coma
 
 
 initialstate = State([])
