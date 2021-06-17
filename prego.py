@@ -8,7 +8,6 @@ D = Action("D", ['p1', 'p4', 'p5'], ['p3', 'p7'])
 actions = [A, B, C, D]
 print(actions)
 
-
 def prego(state, targets):
     global actions
     result = []
@@ -22,7 +21,7 @@ def prego(state, targets):
         else:
             heuristic = actions
             for action in actions:
-                if target in action.effects:
+                if target in action.effects and state.satisfy(action.preconditions):
                     temp = [action] + prego(state, (precondition for precondition in action.preconditions))
                     if len(temp) < len(heuristic):
                         heuristic = temp
