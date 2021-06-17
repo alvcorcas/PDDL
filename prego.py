@@ -47,6 +47,8 @@ def prego(state, targets, actions):
 
 s = State(['p1'])
 print(prego(s, ['p1', 'p8', 'p4'], actions))
+print(prego(s, ['p1', 'p8', 'p4'], actions))
+print(prego(s, ['p1', 'p8', 'p4'], actions))
 
 
 #DuDAD
