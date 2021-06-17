@@ -6,11 +6,11 @@ Created on Mon Jun 14 15:47:05 2021
 """
 
 class Action:
-    def __init__(self, action, preconditions,effects):
-        self.action = action
+    def __init__(self, name, preconditions, effects):
+        self.name = name
         self.preconditions = preconditions
         self.effects = effects
 
     def __repr__(self):
-        return self.action
+        return '\nName: ' + self.name + '\nPreconditions: ' + str(self.preconditions) + '\nEffects: ' + str(self.effects) + '\n'
         
