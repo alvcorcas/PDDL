@@ -1,22 +1,44 @@
 import tkinter as tk
 from tkinter import *
+from State import *
+from Action import *
+from prego import *
 
+
+##El formato para las acciones es A-p2-p4;B-p4-p5;C-p1-p2;D-p1,p4,p5-p3;E-p5,p2-p3;F-p1,p5-p3
+##Es decir NOMBRE-PRECOND-EFECTOS
+##PAra el estado inicial y objetivo, el formato es literales separados por coma
+
+
+initialstate = State([])
+objective = []
+actions = []
 datos= []
+
+def cargardatos(datos):
+        datos[0] = datos[0].replace('\n','')
+        datos[1] = datos[1].replace('\n','')
+        datos[2] = datos[2].replace('\n','')
+
+        for i in datos[0].split(","):
+                initialstate.literals.append(i)
+
+        for i in datos[1].split(","):
+                objective.append(i)
+
+        for i in datos[2].split(";"):
+
+                action1 = Action(i.split("-")[0],[],[])
+                
+                for j in i.split("-")[1].split(","):
+                        action1.preconditions.append(j)
+                for j in i.split("-")[2].split(","):
+                        action1.effects.append(j)
+                actions.append(action1)
 
 root= tk.Tk()
 canvas1 = tk.Canvas(root, width = 450, height = 600)
 canvas1.pack()
-
-label1 = tk.Label(root, text='States:')
-label1.config(font=('helvetica', 10))
-canvas1.create_window(40, 70, window=label1)
-
-
-entry1 = tk.Entry (root) 
-entry1.place(x = 20,
-        y = 100,
-        width=400,
-        height=30)
 
 
 label2 = tk.Label(root, text='Initial state:')
@@ -53,21 +75,26 @@ entry4.place(x = 20,
 
 
 def getSquareRoot ():  
-    x1 = entry1.get()
+    lista = []    
     x2 = entry2.get()
     x3 = entry3.get()
     x4 = entry4.get()
-    datos.append(x1)
+
     datos.append(x2)
     datos.append(x3)
     datos.append(x4)
-
+    cargardatos(datos)
+    lista= prego(initialstate,objective,actions)
+    print(lista)
     
 button1 = tk.Button(text='RUN', command=getSquareRoot)
 canvas1.create_window(40, 500, window=button1)
 
+
+
 root.mainloop()
-print(datos[0])
-print(datos[1])
-print(datos[2])
-print(datos[3])
+
+
+
+
+

@@ -19,3 +19,8 @@ class State:
             if not(condition in self.literals):
                 return False
         return True
+    
+    def __repr__(self):
+        #return '\nName: ' + self.name + '\nPreconditions: ' + str(self.preconditions) + '\nEffects: ' + str(self.effects) + '\n'
+        return self.literals
+
