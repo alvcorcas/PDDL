@@ -2,8 +2,8 @@ import tkinter as tk
 from tkinter import *
 from State import *
 from Action import *
-from prego import *
-from busqueda import *
+from Heuristics import *
+from Search import *
 
 
 # El formato para las acciones es A-p2-p4;B-p4-p5;C-p1-p2;D-p1,p4,p5-p3;E-p5,p2-p3;F-p1,p4-p3
@@ -17,7 +17,6 @@ from busqueda import *
 #A-p6-p18,p8;B-p4-p20,p14,p16;C-p18,p20-p5;D-p7,p3-p6;E-p1-p7,p2;F-p5-p10,p13;G-p9,p13,p12-p11,p19;H-p14,p8-p12;I-p2,p19,p16-p15;J-p15-p21
 #[B, E, D, A, C, F, H, G, I, J]
 #[E, D, B, A, H, C, F, G, I, J]
-
 
 
 initialstate = State([])
@@ -77,7 +76,7 @@ def resultado():
 
         if (chk_state_prego.get()):
                 
-                text['text'] = hacia_adelante(initialstate,objective,actions)
+                text['text'] = forward_search(initialstate,objective,actions)
                 
                 print(prego(initialstate,objective,actions))
         else:

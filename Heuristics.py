@@ -68,7 +68,7 @@ def delta0(state, targets, actions):
     return result
 
 
-s = State(['p1'])
+# s = State(['p1'])
 
 # print(prego(s, ['p1', 'p8', 'p4'], actions))
 
