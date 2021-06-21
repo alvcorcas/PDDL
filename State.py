@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 14 15:02:16 2021
-
-@author: alvar
-"""
 class State:
     def __init__(self, literals):
         self.literals = literals

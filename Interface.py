@@ -19,30 +19,30 @@ from Search import *
 #[E, D, B, A, H, C, F, G, I, J]
 
 
-initialstate = State([])
-objective = []
+initial_state = State([])
+target = []
 actions = []
-datos = []
+data = []
 
 
 
-def cargardatos(datos):
+def cargardata(data):
 
-        datos[0] = datos[0].replace('\n', '') #Eliminamos saltos de líneas
-        datos[1] = datos[1].replace('\n', '')
-        datos[2] = datos[2].replace('\n', '')
-        datos[0] = datos[0].replace(' ', '') #Trimamos las cadenas
-        datos[1] = datos[1].replace(' ', '')
-        datos[2] = datos[2].replace(' ', '')
+        data[0] = data[0].replace('\n', '') #Eliminamos saltos de líneas
+        data[1] = data[1].replace('\n', '')
+        data[2] = data[2].replace('\n', '')
+        data[0] = data[0].replace(' ', '') #Trimamos las cadenas
+        data[1] = data[1].replace(' ', '')
+        data[2] = data[2].replace(' ', '')
 
         
-        for i in datos[0].split(","):
-                initialstate.literals.append(i)
+        for i in data[0].split(","):
+                initial_state.literals.append(i)
 
-        for i in datos[1].split(","):
-                objective.append(i)
+        for i in data[1].split(","):
+                target.append(i)
 
-        for i in datos[2].split(";"):
+        for i in data[2].split(";"):
 
                 action1 = Action(i.split("-")[0], [], [])
 
@@ -57,39 +57,34 @@ def cargardatos(datos):
 
 
 def resultado():
-        global initialstate
-        global objective
+        global initial_state
+        global target
         global actions
-        global datos
+        global data
         global text
-        initialstate = State([])
-        objective = []
+        initial_state = State([])
+        target = []
         actions = []
-        datos = []
+        data = []
         x2 = entry2.get()
         x3 = entry3.get()
         x4 = entry4.get()
-        datos.append(x2)
-        datos.append(x3)
-        datos.append(x4)
-        cargardatos(datos)
+        data.append(x2)
+        data.append(x3)
+        data.append(x4)
+        cargardata(data)
 
         if (chk_state_prego.get()):
                 
-                text['text'] = forward_search(initialstate,objective,actions)
+                text['text'] = forward_search(initial_state,target,actions)
                 
-                print(prego(initialstate,objective,actions))
+                print(prego(initial_state,target,actions))
         else:
-                text['text'] = delta0(initialstate,objective,actions)
+                text['text'] = delta0(initial_state,target,actions)
 
-                
-                print(delta0(initialstate,objective,actions))
+                print(delta0(initial_state,target,actions))
 
     
-
-        
-    
-
 
 root= tk.Tk()
 canvas1 = tk.Canvas(root, width = 450, height = 600)
