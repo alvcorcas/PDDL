@@ -19,10 +19,10 @@ datos = []
 
 def cargardatos(datos):
 
-        datos[0] = datos[0].replace('\n', '')
+        datos[0] = datos[0].replace('\n', '') #Eliminamos saltos de líneas
         datos[1] = datos[1].replace('\n', '')
         datos[2] = datos[2].replace('\n', '')
-        datos[0] = datos[0].replace(' ', '')
+        datos[0] = datos[0].replace(' ', '') #Trimamos las cadenas
         datos[1] = datos[1].replace(' ', '')
         datos[2] = datos[2].replace(' ', '')
 
