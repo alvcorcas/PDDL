@@ -18,7 +18,7 @@ import numpy as np
 
 
 def prego(state, targets, actions):
-    result = []
+    result = 0
     for target in targets:
         if target in state.literals:
             continue
@@ -27,16 +27,16 @@ def prego(state, targets, actions):
 
             # Ninguna accion es causa del literal target
             if (len(causes) == 0):
-                result = result + actions
+                result = result + len(actions)
 
             else:
-                # Inicializo la heuristica como una lista con todas las acciones
+                # Inicializo heuristic como una lista con todas las acciones
                 # y la voy sustituyendo por el conjunto de acciones con menor
                 # cardinal que consigue el objetivo
-                heuristic = actions
+                heuristic = len(actions)
                 for cause in causes:
-                    temp = [cause] + prego(state, cause.preconditions, actions)
-                    if len(temp) < len(heuristic):
+                    temp = 1 + prego(state, cause.preconditions, actions)
+                    if temp < heuristic:
                         heuristic = temp
                 result = result + heuristic
     return result
