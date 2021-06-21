@@ -16,11 +16,11 @@ def forward_search_aux(path, visited, current, target, actions):
 
     for action in sorted_applicable:
         e = current.apply(action)
-        res = forward_search_aux(
+        result = forward_search_aux(
             path + [action], visited + [e], e, target, actions)
-        if res:
-            return res
-    return False
+        if result:
+            return result
+    return 'There is no path from initial state to target'
 
 
 
