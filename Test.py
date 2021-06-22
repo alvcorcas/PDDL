@@ -30,8 +30,8 @@ A_1 = Action("A_1", ['p35', 'p32'], ['p40'])
 
 initial_state = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6']
 target = ['p40']
-actions = [A, B, C, D, E, F, G, H, I, J, K,
-           L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, A_1]
+actions = {A, B, C, D, E, F, G, H, I, J, K,
+           L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, A_1}
 
 print()
 

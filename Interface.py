@@ -21,7 +21,7 @@ from Search import *
 
 initial_state = []
 target = []
-actions = []
+actions = set()
 data = []
 
 
@@ -42,13 +42,13 @@ def cargardata(data):
 
     for i in data[2].split(";"):
 
-        action1 = Action(i.split("-")[0], [], [])
+        action1 = Action(i.split("-")[0], set(), set())
 
         for j in i.split("-")[1].split(","):
-            action1.preconditions.append(j)
+            action1.preconditions.add(j)
         for j in i.split("-")[2].split(","):
-            action1.effects.append(j)
-        actions.append(action1)
+            action1.effects.add(j)
+        actions.add(action1)
 
 
 def resultado():
@@ -60,7 +60,7 @@ def resultado():
 
     initial_state = []
     target = []
-    actions = []
+    actions = set()
     data = []
 
     x2 = entry2.get()

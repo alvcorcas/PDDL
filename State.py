@@ -6,23 +6,18 @@ class State:
         return str(self.literals)
 
     def __eq__(self, other):
-        for literal in other.literals:
-            if not(literal in self.literals):
-                return False
-        return True
+        return all(literal in self.literals for literal in other.literals)
 
     def satisfy(self, conditions):
-        for condition in conditions:
-            if not(condition in self.literals):
-                return False
-        return True
+        return all(condition in self.literals for condition in conditions)
 
     def apply(self, action):
         temp = list(set(self.literals) | set(action.effects))
         return State(temp)
 
     def disapply(self, action):
-        temp = list(set(self.literals) - set(action.effects) | set(action.preconditions))
+        temp = list(set(self.literals) - set(action.effects)
+                    | set(action.preconditions))
         return State(temp)
 
     def __repr__(self):
