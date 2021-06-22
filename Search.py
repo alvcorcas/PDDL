@@ -2,6 +2,7 @@ from Heuristics import *
 
 no_path = 'There is no path from initial state to target'
 
+
 def forward_search_prego(initial_state, target, actions):
     return forward_search_prego_aux([], [], initial_state, target, actions)
 
@@ -10,8 +11,8 @@ def forward_search_prego_aux(path, visited, current, target, actions):
     if current.satisfy(target.literals):
         return path
 
-    applicable = [action for action in actions if (
-        (current.satisfy(action.preconditions)) and (current.apply(action) not in visited))]
+    applicable = [action for action in actions if
+                  current.satisfy(action.preconditions) and current.apply(action) not in visited]
 
     sorted_applicable = sorted(applicable, key=lambda a: prego(
         current.apply(a), target.literals, actions))
@@ -33,8 +34,8 @@ def forward_search_delta0_aux(path, visited, current, target, actions):
     if current.satisfy(target.literals):
         return path
 
-    applicable = [action for action in actions if (
-        (current.satisfy(action.preconditions)) and (current.apply(action) not in visited))]
+    applicable = [action for action in actions if
+                  current.satisfy(action.preconditions) and current.apply(action) not in visited]
 
     sorted_applicable = sorted(applicable, key=lambda a: delta0(
         current.apply(a), target.literals, actions))
@@ -70,8 +71,8 @@ def backward_search_prego_aux(path, visited, initial_state, current, actions):
     if current.satisfy(initial_state.literals):
         return path
 
-    relevants = [action for action in actions if (
-        (current.satisfy(action.effects)) and (current.disapply(action) not in visited))]
+    relevants = [action for action in actions if current.satisfy(
+        action.effects) and current.disapply(action) not in visited]
 
     sorted_relevants = sorted(relevants, key=lambda a: prego(
         initial_state, current.disapply(a).literals,  actions))
@@ -93,8 +94,8 @@ def backward_search_delta0_aux(path, visited, initial_state, current, actions):
     if current.satisfy(initial_state.literals):
         return path
 
-    relevants = [action for action in actions if (
-        (current.satisfy(action.effects)) and (current.disapply(action) not in visited))]
+    relevants = [action for action in actions if
+                 current.satisfy(action.effects) and current.disapply(action) not in visited]
 
     sorted_relevants = sorted(relevants, key=lambda a: delta0(
         initial_state, current.disapply(a).literals, actions))
@@ -111,6 +112,3 @@ def backward_search_delta0_aux(path, visited, initial_state, current, actions):
 # Acciones relevantes:
 # En el planteamiento de la teoria hay un fallo:
 # D = Accion("D",[p1,p4],[p5,p3])
-
-
-
