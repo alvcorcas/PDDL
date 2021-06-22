@@ -6,10 +6,10 @@ class State:
         return str(self.literals)
 
     def __eq__(self, other):
-        return all(literal in self.literals for literal in other.literals)
+        return all(o in self.literals for o in other.literals)
 
     def satisfy(self, conditions):
-        return all(condition in self.literals for condition in conditions)
+        return all(c in self.literals for c in conditions)
 
     def apply(self, action):
         temp = list(set(self.literals) | set(action.effects))
