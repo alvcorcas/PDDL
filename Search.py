@@ -47,6 +47,8 @@ def forward_search_delta0_aux(path, visited, current, target, actions):
             return result
     return no_path
 
+#p1,p3,p4,p9
+# p10,p11,p21
 
 # A-p6-p18,p8;
 # B-p4-p20,p14,p16;
@@ -55,7 +57,8 @@ def forward_search_delta0_aux(path, visited, current, target, actions):
 # E-p1-p7,p2;
 # F-p5-p10,p13;
 # G-p9,p13,p12-p11,p19;
-# H-p14,p8-p12;I-p2,p19,p16-p15;
+# H-p14,p8-p12;
+# I-p2,p19,p16-p15;
 # J-p15-p21
 
 
@@ -64,7 +67,7 @@ def backward_search_prego(initial_state, target, actions):
 
 
 def backward_search_prego_aux(path, visited, initial_state, current, actions):
-    if initial_state.satisfy(current):
+    if current.satisfy(initial_state):
         return path
 
     relevants = [action for action in actions if (
@@ -74,7 +77,7 @@ def backward_search_prego_aux(path, visited, initial_state, current, actions):
         current.disapply(a), initial_state, actions))
 
     for action in sorted_relevants:
-        e = current.apply(action)
+        e = current.disapply(action)
         result = backward_search_prego_aux(
            [action] + path, visited + [e], initial_state, e, actions)
         if result:
@@ -87,7 +90,7 @@ def backward_search_delta0(initial_state, target, actions):
 
 
 def backward_search_delta0_aux(path, visited, initial_state, current, actions):
-    if initial_state.satisfy(current):
+    if current.satisfy(initial_state):
         return path
 
     relevants = [action for action in actions if (
@@ -97,7 +100,7 @@ def backward_search_delta0_aux(path, visited, initial_state, current, actions):
         current.disapply(a), initial_state, actions))
 
     for action in sorted_relevants:
-        e = current.apply(action)
+        e = current.disapply(action)
         result = backward_search_delta0_aux(
            [action] + path, visited + [e], initial_state, e, actions)
         if result:

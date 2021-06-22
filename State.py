@@ -3,7 +3,7 @@ class State:
         self.literals = literals
 
     def __str__(self):
-        return self.literals
+        return str(self.literals)
 
     def __eq__(self, other):
         return self.literals == other.literals
@@ -15,10 +15,12 @@ class State:
         return True
 
     def apply(self, action):
-        return State(list(set(self.literals + action.effects)))
+        temp = list(set(self.literals) | set(action.effects))
+        return State(temp)
 
     def disapply(self, action):
-        return State(list(set((self.literals - action.effects) + action.preconditions)))
+        temp = list(set(self.literals) - set(action.effects) | set(action.preconditions))
+        return State(temp)
 
     def __repr__(self):
-        return self.literals
+        return str(self.literals)
