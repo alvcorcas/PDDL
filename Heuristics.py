@@ -21,7 +21,7 @@ def prego(state, targets, actions):
         if target in state.literals:
             continue
         else:
-            causes = [action for action in actions if target in action.effects]
+            causes = {action for action in actions if target in action.effects}
 
             # Ninguna accion es causa del literal target
             if (len(causes) == 0):
@@ -46,7 +46,7 @@ def delta0(state, targets, actions):
         if target in state.literals:
             continue
         else:
-            causes = [action for action in actions if target in action.effects]
+            causes = {action for action in actions if target in action.effects}
 
             # Ninguna accion es causa del literal target
             if (len(causes) == 0):
