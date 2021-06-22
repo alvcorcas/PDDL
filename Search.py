@@ -1,17 +1,19 @@
 from Heuristics import *
 
+no_path = 'There is no path from initial state to target'
 
 def forward_search_prego(initial_state, target, actions):
     return forward_search_prego_aux([], [], initial_state, target, actions)
+
 
 def forward_search_prego_aux(path, visited, current, target, actions):
     if current.satisfy(target):
         return path
 
-    applicable  = [action for action in actions if (
+    applicable = [action for action in actions if (
         (current.satisfy(action.preconditions)) and (current.apply(action) not in visited))]
 
-    sorted_applicable = sorted(applicable , key=lambda a: prego(
+    sorted_applicable = sorted(applicable, key=lambda a: prego(
         current.apply(a), target, actions))
 
     for action in sorted_applicable:
@@ -20,20 +22,21 @@ def forward_search_prego_aux(path, visited, current, target, actions):
             path + [action], visited + [e], e, target, actions)
         if result:
             return result
-    return 'There is no path from initial state to target'
+    return no_path
 
 
 def forward_search_delta0(initial_state, target, actions):
     return forward_search_delta0_aux([], [], initial_state, target, actions)
 
+
 def forward_search_delta0_aux(path, visited, current, target, actions):
     if current.satisfy(target):
         return path
 
-    applicable  = [action for action in actions if (
+    applicable = [action for action in actions if (
         (current.satisfy(action.preconditions)) and (current.apply(action) not in visited))]
 
-    sorted_applicable = sorted(applicable , key=lambda a: delta0(
+    sorted_applicable = sorted(applicable, key=lambda a: delta0(
         current.apply(a), target, actions))
 
     for action in sorted_applicable:
@@ -42,8 +45,7 @@ def forward_search_delta0_aux(path, visited, current, target, actions):
             path + [action], visited + [e], e, target, actions)
         if result:
             return result
-    return 'There is no path from initial state to target'
-
+    return no_path
 
 
 # A-p6-p18,p8;
@@ -55,3 +57,54 @@ def forward_search_delta0_aux(path, visited, current, target, actions):
 # G-p9,p13,p12-p11,p19;
 # H-p14,p8-p12;I-p2,p19,p16-p15;
 # J-p15-p21
+
+
+def backward_search_prego(initial_state, target, actions):
+    return backward_search_prego_aux([], [], initial_state, target, actions)
+
+
+def backward_search_prego_aux(path, visited, initial_state, current, actions):
+    if initial_state.satisfy(current):
+        return path
+
+    relevants = [action for action in actions if (
+        (current.satisfy(action.effects)) and (current.disapply(action) not in visited))]
+
+    sorted_relevants = sorted(relevants, key=lambda a: prego(
+        current.disapply(a), initial_state, actions))
+
+    for action in sorted_relevants:
+        e = current.apply(action)
+        result = backward_search_prego_aux(
+           [action] + path, visited + [e], initial_state, e, actions)
+        if result:
+            return result
+    return no_path
+
+
+def backward_search_delta0(initial_state, target, actions):
+    return backward_search_delta0_aux([], [], initial_state, target, actions)
+
+
+def backward_search_delta0_aux(path, visited, initial_state, current, actions):
+    if initial_state.satisfy(current):
+        return path
+
+    relevants = [action for action in actions if (
+        (current.satisfy(action.effects)) and (current.disapply(action) not in visited))]
+
+    sorted_relevants = sorted(relevants, key=lambda a: delta0(
+        current.disapply(a), initial_state, actions))
+
+    for action in sorted_relevants:
+        e = current.apply(action)
+        result = backward_search_delta0_aux(
+           [action] + path, visited + [e], initial_state, e, actions)
+        if result:
+            return result
+    return no_path
+
+
+# Acciones relevantes:
+# En el planteamiento de la teoria hay un fallo:
+# D = Accion("D",[p1,p4],[p5,p3])

@@ -16,7 +16,9 @@ class State:
 
     def apply(self, action):
         return State(list(set(self.literals + action.effects)))
-        
+
+    def disapply(self, action):
+        return State(list(set((self.literals - action.effects) + action.preconditions)))
+
     def __repr__(self):
         return self.literals
-
