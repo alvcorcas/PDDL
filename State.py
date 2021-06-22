@@ -6,7 +6,10 @@ class State:
         return str(self.literals)
 
     def __eq__(self, other):
-        return self.literals == other.literals
+        for literal in other.literals:
+            if not(literal in self.literals):
+                return False
+        return True
 
     def satisfy(self, conditions):
         for condition in conditions:

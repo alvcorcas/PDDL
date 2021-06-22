@@ -7,14 +7,14 @@ def forward_search_prego(initial_state, target, actions):
 
 
 def forward_search_prego_aux(path, visited, current, target, actions):
-    if current.satisfy(target):
+    if current.satisfy(target.literals):
         return path
 
     applicable = [action for action in actions if (
         (current.satisfy(action.preconditions)) and (current.apply(action) not in visited))]
 
     sorted_applicable = sorted(applicable, key=lambda a: prego(
-        current.apply(a), target, actions))
+        current.apply(a), target.literals, actions))
 
     for action in sorted_applicable:
         e = current.apply(action)
@@ -30,14 +30,14 @@ def forward_search_delta0(initial_state, target, actions):
 
 
 def forward_search_delta0_aux(path, visited, current, target, actions):
-    if current.satisfy(target):
+    if current.satisfy(target.literals):
         return path
 
     applicable = [action for action in actions if (
         (current.satisfy(action.preconditions)) and (current.apply(action) not in visited))]
 
     sorted_applicable = sorted(applicable, key=lambda a: delta0(
-        current.apply(a), target, actions))
+        current.apply(a), target.literals, actions))
 
     for action in sorted_applicable:
         e = current.apply(action)
@@ -47,7 +47,7 @@ def forward_search_delta0_aux(path, visited, current, target, actions):
             return result
     return no_path
 
-#p1,p3,p4,p9
+# p1,p3,p4,p9
 # p10,p11,p21
 
 # A-p6-p18,p8;
@@ -67,19 +67,19 @@ def backward_search_prego(initial_state, target, actions):
 
 
 def backward_search_prego_aux(path, visited, initial_state, current, actions):
-    if current.satisfy(initial_state):
+    if current.satisfy(initial_state.literals):
         return path
 
     relevants = [action for action in actions if (
         (current.satisfy(action.effects)) and (current.disapply(action) not in visited))]
 
     sorted_relevants = sorted(relevants, key=lambda a: prego(
-        current.disapply(a), initial_state, actions))
+        initial_state, current.disapply(a).literals,  actions))
 
     for action in sorted_relevants:
         e = current.disapply(action)
         result = backward_search_prego_aux(
-           [action] + path, visited + [e], initial_state, e, actions)
+            [action] + path, visited + [e], initial_state, e, actions)
         if result:
             return result
     return no_path
@@ -90,19 +90,19 @@ def backward_search_delta0(initial_state, target, actions):
 
 
 def backward_search_delta0_aux(path, visited, initial_state, current, actions):
-    if current.satisfy(initial_state):
+    if current.satisfy(initial_state.literals):
         return path
 
     relevants = [action for action in actions if (
         (current.satisfy(action.effects)) and (current.disapply(action) not in visited))]
 
     sorted_relevants = sorted(relevants, key=lambda a: delta0(
-        current.disapply(a), initial_state, actions))
+        initial_state, current.disapply(a).literals, actions))
 
     for action in sorted_relevants:
         e = current.disapply(action)
         result = backward_search_delta0_aux(
-           [action] + path, visited + [e], initial_state, e, actions)
+            [action] + path, visited + [e], initial_state, e, actions)
         if result:
             return result
     return no_path
@@ -111,3 +111,6 @@ def backward_search_delta0_aux(path, visited, initial_state, current, actions):
 # Acciones relevantes:
 # En el planteamiento de la teoria hay un fallo:
 # D = Accion("D",[p1,p4],[p5,p3])
+
+
+

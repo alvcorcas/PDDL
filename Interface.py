@@ -57,35 +57,40 @@ def resultado():
     global actions
     global data
     global text
+
     initial_state = []
     target = []
     actions = []
     data = []
+
     x2 = entry2.get()
     x3 = entry3.get()
     x4 = entry4.get()
+
     #x2 = 'p1,p3,p4,p9'
     #x3 = 'p10,p11,p21'
     #x4 = 'A-p6-p18,p8;B-p4-p20,p14,p16;C-p18,p20-p5;D-p7,p3-p6;E-p1-p7,p2;F-p5-p10,p13;G-p9,p13,p12-p11,p19;H-p14,p8-p12;I-p2,p19,p16-p15;J-p15-p21'
+
     data.append(x2)
     data.append(x3)
     data.append(x4)
+    
     cargardata(data)
 
     if (chk_state_prego.get()):
         if(chk_state_backwards.get()):
             text['text'] = backward_search_prego(
-                initial_state, State(target), actions)
+                State(initial_state), State(target), actions)
         else:
             text['text'] = forward_search_prego(
-                State(initial_state), target, actions)
+                State(initial_state), State(target), actions)
     else:
         if(chk_state_backwards.get()):
             text['text'] = backward_search_delta0(
-                initial_state, State(target), actions)
+                State(initial_state), State(target), actions)
         else:
             text['text'] = forward_search_delta0(
-                State(initial_state), target, actions)
+                State(initial_state), State(target), actions)
 
 
 root = tk.Tk()
