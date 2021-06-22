@@ -1,10 +1,10 @@
 from Heuristics import *
 
 
-def forward_search(initial_state, target, actions):
-    return forward_search_aux([], [], initial_state, target, actions)
+def forward_search_prego(initial_state, target, actions):
+    return forward_search_prego_aux([], [], initial_state, target, actions)
 
-def forward_search_aux(path, visited, current, target, actions):
+def forward_search_prego_aux(path, visited, current, target, actions):
     if current.satisfy(target):
         return path
 
@@ -16,7 +16,29 @@ def forward_search_aux(path, visited, current, target, actions):
 
     for action in sorted_applicable:
         e = current.apply(action)
-        result = forward_search_aux(
+        result = forward_search_prego_aux(
+            path + [action], visited + [e], e, target, actions)
+        if result:
+            return result
+    return 'There is no path from initial state to target'
+
+
+def forward_search_delta0(initial_state, target, actions):
+    return forward_search_delta0_aux([], [], initial_state, target, actions)
+
+def forward_search_delta0_aux(path, visited, current, target, actions):
+    if current.satisfy(target):
+        return path
+
+    applicable  = [action for action in actions if (
+        (current.satisfy(action.preconditions)) and (current.apply(action) not in visited))]
+
+    sorted_applicable = sorted(applicable , key=lambda a: delta0(
+        current.apply(a), target, actions))
+
+    for action in sorted_applicable:
+        e = current.apply(action)
+        result = forward_search_delta0_aux(
             path + [action], visited + [e], e, target, actions)
         if result:
             return result

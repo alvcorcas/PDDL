@@ -76,19 +76,19 @@ def resultado():
 
         if (chk_state_prego.get()):
                 
-                text['text'] = forward_search(initial_state,target,actions)
+                text['text'] = forward_search_prego(initial_state,target,actions)
                 
-                print(prego(initial_state,target,actions))
         else:
-                text['text'] = delta0(initial_state,target,actions)
+                text['text'] = forward_search_delta0(initial_state,target,actions)
 
-                print(delta0(initial_state,target,actions))
 
     
 
 root= tk.Tk()
+root.title('PDDL')
 canvas1 = tk.Canvas(root, width = 450, height = 600)
 canvas1.pack()
+
 
 
 label2 = tk.Label(root, text='Initial state:')
@@ -100,6 +100,8 @@ entry2.place(x = 20,
         width=400,
         height=30)
 
+format2 = Label(root, text="FORMAT: p1,p2,p3")   
+format2.place(x=20,y=180)
 
 label3 = tk.Label(root, text='Final state:')
 label3.config(font=('helvetica', 10))
@@ -110,6 +112,9 @@ entry3.place(x = 20,
         y = 250,
         width=400,
         height=30)
+
+format3 = Label(root, text="FORMAT: p1,p2,p3")   
+format3.place(x=20,y=280)
 
 
 label4 = tk.Label(root, text='Actions:')
@@ -122,14 +127,17 @@ entry4.place(x = 20,
         width=400,
         height=30)
 
+format4 = Label(root, text="FORMAT: A-p1,p2,p3-p4;B-p2-p5 (NAME-PRECONDITIONS-EFFECTS)")   
+format4.place(x=20,y=380)
+
 
 chk_state_prego = BooleanVar()
 
 chk_state_prego.set(True) #set check state
 
-chk_prego = Checkbutton(root, text='Choose the heuristic prego // Si no se marca, se utilizará ∆0', var=chk_state_prego)
+chk_prego = Checkbutton(root, text='Choose the heuristic prego // Default ∆0', var=chk_state_prego)
 
-chk_prego.place(x=20, y=400)
+chk_prego.place(x=20, y=440)
 
 
     
