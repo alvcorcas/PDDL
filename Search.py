@@ -51,7 +51,7 @@ def backward_search_prego(initial_state, target, actions):
     return backward_search_prego_aux([], [], initial_state, target, actions)
 
 def backward_search_prego_aux(path, visited, initial_state, current, actions):
-    if current.satisfy(initial_state.literals):
+    if initial_state == current:
         return path
 
     relevants = [action for action in actions if current.satisfy(
@@ -73,7 +73,7 @@ def backward_search_delta0(initial_state, target, actions):
     return backward_search_delta0_aux([], [], initial_state, target, actions)
 
 def backward_search_delta0_aux(path, visited, initial_state, current, actions):
-    if current.satisfy(initial_state.literals):
+    if initial_state == current:
         return path
 
     relevants = [action for action in actions if
