@@ -41,7 +41,7 @@ print('\nHacia delante prego:')
 print(forward_search_prego(State(initial_state), State(target), actions))
 print('\nHacia atrás delta0:')
 print(backward_search_delta0(State(initial_state), State(target), actions))
-print('\nHacia delante prego:')
+print('\nHacia delante delta0:')
 print(forward_search_delta0(State(initial_state), State(target), actions))
 print()
 
