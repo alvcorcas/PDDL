@@ -2,8 +2,10 @@ from Action import *
 from State import *
 import numpy as np
 
-
 def prego(state, targets, actions):
+    return len(prego_aux(state, targets, actions))
+
+def prego_aux(state, targets, actions):
     result = []
     for target in targets:
         if target not in state.literals:
@@ -14,7 +16,7 @@ def prego(state, targets, actions):
 
             else:
                 heuristic = [
-                    [cause] + prego(state, cause.preconditions, actions) for cause in causes]
+                    [cause] + prego_aux(state, cause.preconditions, actions) for cause in causes]
                 result += min(heuristic, key=lambda x: len(x))
     return result
 

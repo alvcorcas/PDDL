@@ -13,8 +13,8 @@ def forward_search_prego_aux(path, visited, current, target, actions):
     applicable = [action for action in actions if
                   current.satisfy(action.preconditions) and current.apply(action) not in visited]
 
-    sorted_applicable = sorted(applicable, key=lambda a: len(prego(
-        current.apply(a), target.literals, actions))) 
+    sorted_applicable = sorted(applicable, key=lambda a: prego(
+        current.apply(a), target.literals, actions)) 
 
     for action in sorted_applicable:
         e = current.apply(action)
@@ -57,8 +57,8 @@ def backward_search_prego_aux(path, visited, initial_state, current, actions):
     relevants = [action for action in actions if current.satisfy(
         action.effects) and current.disapply(action) not in visited]
 
-    sorted_relevants = sorted(relevants, key=lambda a: len(prego(
-        initial_state, current.disapply(a).literals,  actions)))
+    sorted_relevants = sorted(relevants, key=lambda a: prego(
+        initial_state, current.disapply(a).literals,  actions))
 
     for action in sorted_relevants:
         e = current.disapply(action)
