@@ -1,10 +1,11 @@
 import tkinter as tk
-from tkinter import *
-from State import *
-from Action import *
-from Heuristics import *
-from Search import *
+from tkinter import Tk, Label, Canvas, Entry, Button, BooleanVar, Checkbutton
+from State import State
+from Action import Action
+import Heuristics as heur
+import Search as search
 import time as tm
+from time import time
 
 # El formato para las acciones es A-p2-p4;B-p4-p5;C-p1-p2;D-p1,p4,p5-p3;E-p5,p2-p3;F-p1,p4-p3
 # Es decir NOMBRE-PRECOND-EFECTOS
@@ -74,26 +75,25 @@ def resultado():
     data.append(x2)
     data.append(x3)
     data.append(x4)
-    
+
     cargardata(data)
     begin = tm.time()
     if (chk_state_prego.get()):
         if(chk_state_backwards.get()):
-            text['text'] = backward_search_prego(
+            text['text'] = search.backward_search_prego(
                 State(initial_state), State(target), actions)
         else:
-            text['text'] = forward_search_prego(
+            text['text'] = search.forward_search_prego(
                 State(initial_state), State(target), actions)
     else:
         if(chk_state_backwards.get()):
-            text['text'] = backward_search_delta0(
+            text['text'] = search.backward_search_delta0(
                 State(initial_state), State(target), actions)
         else:
-            text['text'] = forward_search_delta0(
+            text['text'] = search.forward_search_delta0(
                 State(initial_state), State(target), actions)
     end = tm.time()
     text2['text'] = f'{end - begin} seconds'
-
 
 
 root = tk.Tk()

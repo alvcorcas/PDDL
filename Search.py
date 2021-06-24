@@ -1,7 +1,6 @@
-from Heuristics import *
+import Heuristics as heur
 
 no_path = 'There is no path from initial state to target'
-
 
 def forward_search_prego(initial_state, target, actions):
     return forward_search_prego_aux([], [], initial_state, target, actions)
@@ -13,7 +12,7 @@ def forward_search_prego_aux(path, visited, current, target, actions):
     applicable = [action for action in actions if
                   current.satisfy(action.preconditions) and current.apply(action) not in visited]
 
-    sorted_applicable = sorted(applicable, key=lambda a: prego(
+    sorted_applicable = sorted(applicable, key=lambda a: heur.prego(
         current.apply(a), target.literals, actions)) 
 
     for action in sorted_applicable:
@@ -35,7 +34,7 @@ def forward_search_delta0_aux(path, visited, current, target, actions):
     applicable = [action for action in actions if
                   current.satisfy(action.preconditions) and current.apply(action) not in visited]
 
-    sorted_applicable = sorted(applicable, key=lambda a: delta0(
+    sorted_applicable = sorted(applicable, key=lambda a: heur.delta0(
         current.apply(a), target.literals, actions))
 
     for action in sorted_applicable:
@@ -57,7 +56,7 @@ def backward_search_prego_aux(path, visited, initial_state, current, actions):
     relevants = [action for action in actions if current.satisfy(
         action.effects) and current.disapply(action) not in visited]
 
-    sorted_relevants = sorted(relevants, key=lambda a: prego(
+    sorted_relevants = sorted(relevants, key=lambda a: heur.prego(
         initial_state, current.disapply(a).literals,  actions))
 
     for action in sorted_relevants:
@@ -79,7 +78,7 @@ def backward_search_delta0_aux(path, visited, initial_state, current, actions):
     relevants = [action for action in actions if
                  current.satisfy(action.effects) and current.disapply(action) not in visited]
 
-    sorted_relevants = sorted(relevants, key=lambda a: delta0(
+    sorted_relevants = sorted(relevants, key=lambda a: heur.delta0(
         initial_state, current.disapply(a).literals, actions))
 
     for action in sorted_relevants:

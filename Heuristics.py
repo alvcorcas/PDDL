@@ -1,5 +1,3 @@
-from Action import *
-from State import *
 import numpy as np
 
 def prego(state, targets, actions):
