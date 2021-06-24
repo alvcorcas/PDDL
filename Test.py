@@ -1,4 +1,5 @@
 from Search import *
+import time as tm
 
 A = Action("A", {'p1', 'p2'}, {'p7'})
 B = Action("B", {'p3', 'p4', 'p5'}, {'p8'})
@@ -36,13 +37,29 @@ actions = {A, B, C, D, E, F, G, H, I, J, K,
 
 print()
 print('\nHacia atrás prego:')
+time0 = tm.time()
 print(backward_search_prego(State(initial_state), State(target), actions))
+time1 = tm.time()
+print(f'Tiempo: {time1 - time0}')
+
 print('\nHacia delante prego:')
+time2 = tm.time()
 print(forward_search_prego(State(initial_state), State(target), actions))
+time3 = tm.time()
+print(f'Tiempo: {time3 - time2}')
+
 print('\nHacia atrás delta0:')
+time4 = tm.time()
 print(backward_search_delta0(State(initial_state), State(target), actions))
+time5 = tm.time()
+print(f'Tiempo: {time5 - time4}')
+
 print('\nHacia delante delta0:')
+time6 = tm.time()
 print(forward_search_delta0(State(initial_state), State(target), actions))
+time7 = tm.time()
+print(f'Tiempo: {time7 - time6}')
+
 print()
 
 
