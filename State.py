@@ -3,7 +3,9 @@ class State:
         self.literals = literals
 
     def __eq__(self, other):
-        return all(o in self.literals for o in other.literals)
+        temp = all(o in self.literals for o in other.literals) and all(
+            s in other.literals for s in self.literals)
+        return temp
 
     def __repr__(self):
         return str(self.literals)
