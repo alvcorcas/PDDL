@@ -3,9 +3,7 @@ class State:
         self.literals = literals
 
     def __eq__(self, other):
-        temp = all(o in self.literals for o in other.literals) and all(
-            s in other.literals for s in self.literals)
-        return temp
+        return set(self.literals) == set(other.literals)
 
     def __repr__(self):
         return str(self.literals)
@@ -17,9 +15,7 @@ class State:
         return all(c in self.literals for c in conditions)
 
     def apply(self, action):
-        temp = list(set(self.literals) | action.effects)
-        return State(temp)
+        return State(list(set(self.literals) | action.effects))
 
     def disapply(self, action):
-        temp = list(set(self.literals) - action.effects | action.preconditions)
-        return State(temp)
+        return State(list(set(self.literals) - action.effects | action.preconditions))
