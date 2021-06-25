@@ -46,25 +46,25 @@ def cargardata(data):
             new_var = i.split("-")
             if len(new_var) == 5:
                 action1 = Action(new_var[0], set(), set(), set(), set())
-                for j in new_var[1].split(","):
+                for j in new_var[1].split(" "):
                     if j != '':
                         action1.pos_preconditions.add(j)
-                for j in new_var[2].split(","):
+                for j in new_var[2].split(" "):
                     if j != '':
                         action1.neg_preconditions.add(j)
-                for j in new_var[3].split(","):
+                for j in new_var[3].split(" "):
                     if j != '':
                         action1.pos_effects.add(j)
-                for j in new_var[4].split(","):
+                for j in new_var[4].split(" "):
                     if j != '':
                         action1.neg_effects.add(j)
                 actions.add(action1)
             else:
                 action1 = Action(new_var[0], set(), set(), set(), set())
-                for j in new_var[1].split(","):
+                for j in new_var[1].split(" "):
                     if j != '':
                         action1.pos_preconditions.add(j)
-                for j in new_var[2].split(","):
+                for j in new_var[2].split(" "):
                     if j != '':
                         action1.pos_effects.add(j)
                 actions.add(action1)

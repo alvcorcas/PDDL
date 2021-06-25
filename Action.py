@@ -7,23 +7,55 @@ class Action:
         self.neg_effects = neg_effects
 
     def __repr__(self):
-        # result = "\nName: " + self.name + "\nPreconditions:"
-        # for p in self.pos_preconditions:
-        #     temp = "\n\t" + p
-        #     result += temp
+        result = self.name + "-"
+        for p in self.pos_preconditions:
+            result += (p + ' ')
 
-        # for p in self.neg_preconditions:
-        #     temp = "\n\t-" + p
-        #     result += temp
+        result = result[:-1]
+        result += "-"
 
-        # result += "\nEffects:"
+        for p in self.neg_preconditions:
+            result += (p + ' ')
 
-        # for e in self.pos_effects:
-        #     temp = "\n\t" + e
-        #     result += temp
+        result = result[:-1]
+        result += "-"
 
-        # for e in self.neg_effects:
-        #     temp = "\n\t-" + e
-        #     result += temp
-        result = self.name
+        for e in self.pos_effects:
+            result += (e + ' ')
+        
+        result = result[:-1]
+        result += "-"
+
+        for e in self.neg_effects:
+            result += (e + ' ')
+        
+        result = result[:-1]
+        result += ";"
+        return result
+
+    def __str__(self):
+        result = self.name + "-"
+        for p in self.pos_preconditions:
+            result += (p + ' ')
+
+        result = result[:-1]
+        result += "-"
+
+        for p in self.neg_preconditions:
+            result += (p + ' ')
+
+        result = result[:-1]
+        result += "-"
+
+        for e in self.pos_effects:
+            result += (e + ' ')
+        
+        result = result[:-1]
+        result += "-"
+
+        for e in self.neg_effects:
+            result += (e + ' ')
+        
+        result = result[:-1]
+        result += ";"
         return result

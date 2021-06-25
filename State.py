@@ -38,7 +38,7 @@ class State:
         contains_any_neg_effects = any(
             n not in self.literals for n in action.neg_effects) or len(action.neg_effects) == 0
 
-        pos_contains_neg = all(
+        pos_contains_neg = not any(
             n in self.literals for n in action.neg_effects) or len(action.neg_effects) == 0
 
         neg_contains_pos = not any(
