@@ -32,7 +32,7 @@ Z = Action("Z", {'p34', 'p36', 'p37'}, {'p40'})
 A_1 = Action("A_1", {'p35', 'p32'}, {'p40'})
 
 initial_state = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6']
-target = ['p40']
+target = ['p29', 'p27', 'p18']
 actions = {A, B, C, D, E, F, G, H, I, J, K,
            L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, A_1}
 
@@ -50,22 +50,23 @@ print(search.forward_search_prego(State(initial_state), State(target), actions))
 time3 = tm.time()
 print(f'Tiempo: {time3 - time2}')
 
-print('\nHacia atrás delta0:')
-time4 = tm.time()
-print(search.backward_search_delta0(State(initial_state), State(target), actions))
-time5 = tm.time()
-print(f'Tiempo: {time5 - time4}')
-
 print('\nHacia delante delta0:')
 time6 = tm.time()
 print(search.forward_search_delta0(State(initial_state), State(target), actions))
 time7 = tm.time()
 print(f'Tiempo: {time7 - time6}')
 
-print()
+print('\nHacia atrás delta0:')
+time4 = tm.time()
+print(search.backward_search_delta0(State(initial_state), State(target), actions))
+time5 = tm.time()
+print(f'Tiempo: {time5 - time4}')
 
 
-#path = [A, B, L, C, K, D, E, F, J, M]
+# print()
+
+
+# path = [A, B, L, C, K, D, E, F, J, M]
 # visited = [State(['p3', 'p4', 'p2', 'p5', 'p1', 'p6', 'p7']),
 #           State(['p3', 'p4', 'p2', 'p5', 'p1', 'p6', 'p8', 'p7']),
 #           State(['p3', 'p4', 'p2', 'p8', 'p16', 'p5', 'p1', 'p6', 'p7']),
@@ -83,6 +84,59 @@ print()
 #           State(['p4', 'p16', 'p11', 'p12', 'p13', 'p6', 'p7', 'p3', 'p2', 'p10', 'p15', 'p8', 'p9', 'p5', 'p1', 'p17', 'p14'])]
 # current = ['p4', 'p16', 'p11', 'p12', 'p13', 'p6', 'p7', 'p3',
 #           'p2', 'p10', 'p15', 'p8', 'p9', 'p5', 'p1', 'p17', 'p14']
-#
+
 # print(forward_search_prego_aux(path, visited,
 #                               State(current), State(target), actions))
+
+
+# s1 = State(['p1', 'p3', 'p5'])
+# visiteds = [State(['p1', 'p3'])]
+# print(s1.not_in(visiteds))
+
+# actions = set()
+
+
+# def conexion_entre(hab1, hab2):
+#     actions.add(Action(f"ir({hab1}, {hab2})", {
+#                 f'en({hab1})', f'abierta({hab1}, {hab2})'}, set(), {f'en({hab2})'}, set()))
+#     actions.add(Action(f"ir({hab2}, {hab1})", {
+#                 f'en({hab2})', f'abierta({hab1}, {hab2})'}, set(), {f'en({hab1})'}, set()))
+#     actions.add(Action(f"abrir_puerta({hab1}, {hab2})", {f'en({hab1})'}, {
+#                 f'abierta({hab1}, {hab2})'}, {f'abierta({hab1}, {hab2})'}, set()))
+#     actions.add(Action(f"abrir_puerta({hab2}, {hab1})", {f'en({hab2})'}, {
+#                 f'abierta({hab1}, {hab2})'}, {f'abierta({hab1}, {hab2})'}, set()))
+
+
+# conexion_entre('A', 'B')
+# conexion_entre('A', 'C')
+# conexion_entre('B', 'D')
+# conexion_entre('C', 'E')
+# conexion_entre('C', 'F')
+# conexion_entre('D', 'E')
+# conexion_entre('D', 'F')
+# conexion_entre('E', 'Z')
+
+# print(actions)
+
+
+# literals = ['en(A)'             , 'abierta(A, B)'
+#             , 'abierta(C, E)', 'abierta(C, F)'
+#             , 'abierta(D, F)'
+#             , 'abierta(E, Z)'
+#             ]
+
+# initial_state = State(literals)
+
+# target = State(['en(E)'])
+
+# print('\nHacia delante delta0:')
+# time6 = tm.time()
+# print(search.forward_search_delta0(State(['p1']), State(['p3']), {Action('A', {'p1'}, set(), {'p3'}, set())}))
+# time7 = tm.time()
+# print(f'Tiempo: {time7 - time6}')
+
+# print('\nHacia atrás delta0:')
+# time4 = tm.time()
+# print(search.backward_search_delta0(State(['p1']), State(['p3']), {Action('A', {'p1'}, set(), {'p3'}, set())}))
+# time5 = tm.time()
+# print(f'Tiempo: {time5 - time4}')

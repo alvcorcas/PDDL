@@ -14,7 +14,7 @@ from time import time
 
 # CAMPU
 # p1,p3,p4,p9
-# p10,p11,p21
+# p20,p7,p19
 # A-p6-p18,p8;B-p4-p20,p14,p16;C-p18,p20-p5;D-p7,p3-p6;E-p1-p7,p2;F-p5-p10,p13;G-p9,p13,p12-p11,p19;H-p14,p8-p12;I-p2,p19,p16-p15;J-p15-p21
 #[B, E, D, A, C, F, H, G, I, J]
 #[E, D, B, A, H, C, F, G, I, J]
@@ -42,14 +42,32 @@ def cargardata(data):
         target.append(i)
 
     for i in data[2].split(";"):
-
-        action1 = Action(i.split("-")[0], set(), set())
-
-        for j in i.split("-")[1].split(","):
-            action1.preconditions.add(j)
-        for j in i.split("-")[2].split(","):
-            action1.effects.add(j)
-        actions.add(action1)
+        if i != '':
+            new_var = i.split("-")
+            if len(new_var) == 5:
+                action1 = Action(new_var[0], set(), set(), set(), set())
+                for j in new_var[1].split(","):
+                    if j != '':
+                        action1.pos_preconditions.add(j)
+                for j in new_var[2].split(","):
+                    if j != '':
+                        action1.neg_preconditions.add(j)
+                for j in new_var[3].split(","):
+                    if j != '':
+                        action1.pos_effects.add(j)
+                for j in new_var[4].split(","):
+                    if j != '':
+                        action1.neg_effects.add(j)
+                actions.add(action1)
+            else:
+                action1 = Action(new_var[0], set(), set(), set(), set())
+                for j in new_var[1].split(","):
+                    if j != '':
+                        action1.pos_preconditions.add(j)
+                for j in new_var[2].split(","):
+                    if j != '':
+                        action1.pos_effects.add(j)
+                actions.add(action1)
 
 
 def resultado():
@@ -64,13 +82,13 @@ def resultado():
     actions = set()
     data = []
 
-    x2 = entry2.get()
-    x3 = entry3.get()
-    x4 = entry4.get()
+    # x2 = entry2.get()
+    # x3 = entry3.get()
+    # x4 = entry4.get()
 
-    #x2 = 'p1,p3,p4,p9'
-    #x3 = 'p10,p11,p21'
-    #x4 = 'A-p6-p18,p8;B-p4-p20,p14,p16;C-p18,p20-p5;D-p7,p3-p6;E-p1-p7,p2;F-p5-p10,p13;G-p9,p13,p12-p11,p19;H-p14,p8-p12;I-p2,p19,p16-p15;J-p15-p21'
+    x2 = 'p1,p3,p4,p9'
+    x3 = 'p10,p11,p21'
+    x4 = 'A-p6-p18,p8;B-p4-p20,p14,p16;C-p18,p20-p5;D-p7,p3-p6;E-p1-p7,p2;F-p5-p10,p13;G-p9,p13,p12-p11,p19;H-p14,p8-p12;I-p2,p19,p16-p15;J-p15-p21'
 
     data.append(x2)
     data.append(x3)
