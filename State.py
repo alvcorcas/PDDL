@@ -21,8 +21,6 @@ class State:
         satisfy_neg_preconditions = all(
             n not in self.literals for n in action.neg_preconditions) or len(action.neg_preconditions) == 0
 
-        print(len(action.neg_preconditions))
-
         return satisfy_pos_preconditions and satisfy_neg_preconditions
 
     def apply(self, action):

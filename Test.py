@@ -97,10 +97,10 @@ actions = set()
 
 
 def conexion_entre(hab1, hab2):
-    actions.add(Action(f"ir({hab1}, {hab2})", {
-                f'en({hab1})', f'abierta({hab1}, {hab2})'}, set(), {f'en({hab2})'}, {f'en({hab1})'}))
-    actions.add(Action(f"abrir_puerta({hab1}, {hab2})", {f'en({hab1})'}, {
-                f'abierta({hab1}, {hab2})'}, {f'abierta({hab1}, {hab2})'}, set()))
+    actions.add(Action(f"ir({hab1},{hab2})", {
+                f'en({hab1})', f'abierta({hab1},{hab2})'}, set(), {f'en({hab2})'}, {f'en({hab1})'}))
+    actions.add(Action(f"abrir_puerta({hab1},{hab2})", {f'en({hab1})'}, {
+                f'abierta({hab1},{hab2})'}, {f'abierta({hab1},{hab2})'}, set()))
 
 
 conexion_entre('A', 'B')
@@ -112,24 +112,62 @@ conexion_entre('D', 'E')
 conexion_entre('D', 'F')
 conexion_entre('E', 'Z')
 
-print(actions)
+# for a in actions:
+#     print(a, end=';')
 
 
-literals = ['en(A)', 'abierta(A, B)', 'abierta(C, E)', 'abierta(C, F)', 'abierta(D, F)', 'abierta(E, Z)'
+literals = ['en(A)', 'abierta(A,B)', 'abierta(C,E)', 'abierta(C,F)', 'abierta(D,F)', 'abierta(E,Z)'
             ]
 
 initial_state = State(literals)
 
 target = State(['en(Z)'])
 
-print('\nHacia delante delta0:')
-time6 = tm.time()
-print(search.forward_search_delta0(initial_state, target, actions))
-time7 = tm.time()
-print(f'Tiempo: {time7 - time6}')
+# print('\nHacia delante delta0:')
+# time6 = tm.time()
+# print(search.forward_search_delta0(initial_state, target, actions))
+# time7 = tm.time()
+# print(f'Tiempo: {time7 - time6}')
 
-print('\nHacia atrás delta0:')
-time4 = tm.time()
-print(search.backward_search_delta0(initial_state, target, actions))
-time5 = tm.time()
-print(f'Tiempo: {time5 - time4}')
+# print('\nHacia atrás delta0:')
+# time4 = tm.time()
+# print(search.backward_search_delta0(initial_state, target, actions))
+# time5 = tm.time()
+# print(f'Tiempo: {time5 - time4}')
+
+def checking(other_state, other_target, other_actions):
+    global initial_state
+    global target
+    global actions
+
+    print(target)
+    print()
+    print()
+    print()
+    print(other_target)
+
+    print(other_state)
+    print()
+    print()
+    print()
+    print(initial_state)
+
+    print(other_actions)
+    print()
+    print()
+    print()
+    print(actions)
+
+
+
+
+
+
+
+
+
+    print(other_actions)
+    print()
+    print()
+    print()
+    print(actions)

@@ -5,57 +5,81 @@ class Action:
         self.neg_preconditions = neg_preconditions
         self.pos_effects = pos_effects
         self.neg_effects = neg_effects
-
+    
     def __repr__(self):
-        result = self.name + "-"
-        for p in self.pos_preconditions:
-            result += (p + ' ')
+        result = self.name # + "-"
 
-        result = result[:-1]
-        result += "-"
+        # if len(self.pos_preconditions) != 0:
+        #     for p in self.pos_preconditions:
+        #         result += (p + ' ')
+        # else:
+        #     result += "-"
 
-        for p in self.neg_preconditions:
-            result += (p + ' ')
+        # result = result[:-1]
+        # result += "-"
 
-        result = result[:-1]
-        result += "-"
-
-        for e in self.pos_effects:
-            result += (e + ' ')
+        # if len(self.neg_preconditions) != 0:
+        #     for p in self.neg_preconditions:
+        #         result += (p + ' ')
+        # else:
+        #     result += "-"
         
-        result = result[:-1]
-        result += "-"
+        # result = result[:-1]
+        # result += "-"
 
-        for e in self.neg_effects:
-            result += (e + ' ')
+        # if len(self.pos_effects) != 0:
+        #     for e in self.pos_effects:
+        #         result += (e + ' ')
+        # else:
+        #     result += "-"
         
-        result = result[:-1]
-        result += ";"
+        # result = result[:-1]
+        # result += "-"
+
+        # if len(self.neg_effects) != 0:
+        #     for e in self.neg_effects:
+        #         result += (e + ' ')
+        # else:
+        #     result += "-"
+        
+        # result = result[:-1]
         return result
 
     def __str__(self):
-        result = self.name + "-"
-        for p in self.pos_preconditions:
-            result += (p + ' ')
+        result = self.name # + "-"
 
-        result = result[:-1]
-        result += "-"
+        # if len(self.pos_preconditions) != 0:
+        #     for p in self.pos_preconditions:
+        #         result += (p + ' ')
+        # else:
+        #     result += "-"
 
-        for p in self.neg_preconditions:
-            result += (p + ' ')
+        # result = result[:-1]
+        # result += "-"
 
-        result = result[:-1]
-        result += "-"
-
-        for e in self.pos_effects:
-            result += (e + ' ')
+        # if len(self.neg_preconditions) != 0:
+        #     for p in self.neg_preconditions:
+        #         result += (p + ' ')
+        # else:
+        #     result += "-"
         
-        result = result[:-1]
-        result += "-"
+        # result = result[:-1]
+        # result += "-"
 
-        for e in self.neg_effects:
-            result += (e + ' ')
+        # if len(self.pos_effects) != 0:
+        #     for e in self.pos_effects:
+        #         result += (e + ' ')
+        # else:
+        #     result += "-"
         
-        result = result[:-1]
-        result += ";"
+        # result = result[:-1]
+        # result += "-"
+
+        # if len(self.neg_effects) != 0:
+        #     for e in self.neg_effects:
+        #         result += (e + ' ')
+        # else:
+        #     result += "-"
+        
+        # result = result[:-1]
         return result

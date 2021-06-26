@@ -4,6 +4,7 @@ from State import State
 from Action import Action
 import Heuristics as heur
 import Search as search
+import Test as test
 import time as tm
 from time import time
 
@@ -31,14 +32,11 @@ def cargardata(data):
     data[0] = data[0].replace('\n', '')  # Eliminamos saltos de líneas
     data[1] = data[1].replace('\n', '')
     data[2] = data[2].replace('\n', '')
-    data[0] = data[0].replace(' ', '')  # Trimamos las cadenas
-    data[1] = data[1].replace(' ', '')
-    data[2] = data[2].replace(' ', '')
 
-    for i in data[0].split(","):
+    for i in data[0].split(" "):
         initial_state.append(i)
 
-    for i in data[1].split(","):
+    for i in data[1].split(" "):
         target.append(i)
 
     for i in data[2].split(";"):
@@ -82,19 +80,16 @@ def resultado():
     actions = set()
     data = []
 
-    # x2 = entry2.get()
-    # x3 = entry3.get()
-    # x4 = entry4.get()
-
-    x2 = 'p1,p3,p4,p9'
-    x3 = 'p10,p11,p21'
-    x4 = 'A-p6-p18,p8;B-p4-p20,p14,p16;C-p18,p20-p5;D-p7,p3-p6;E-p1-p7,p2;F-p5-p10,p13;G-p9,p13,p12-p11,p19;H-p14,p8-p12;I-p2,p19,p16-p15;J-p15-p21'
+    x2 = entry2.get()
+    x3 = entry3.get()
+    x4 = entry4.get()
 
     data.append(x2)
     data.append(x3)
     data.append(x4)
 
     cargardata(data)
+
     begin = tm.time()
     if (chk_state_prego.get()):
         if(chk_state_backwards.get()):
@@ -129,7 +124,7 @@ entry2.place(x=20,
              width=400,
              height=30)
 
-format2 = Label(root, text="FORMAT: p1,p2,p3")
+format2 = Label(root, text="FORMAT: pred(A) pred(A, B) pred(C, E) pred(C, F) pred(D, F) pred(E, Z)")
 format2.place(x=20, y=180)
 
 label3 = tk.Label(root, text='Final state:')
@@ -142,7 +137,7 @@ entry3.place(x=20,
              width=400,
              height=30)
 
-format3 = Label(root, text="FORMAT: p1,p2,p3")
+format3 = Label(root, text="FORMAT: pred(Z), pred(A, B)")
 format3.place(x=20, y=280)
 
 
@@ -157,7 +152,8 @@ entry4.place(x=20,
              height=30)
 
 format4 = Label(
-    root, text="FORMAT: A-p1,p2,p3-p4;B-p2-p5 (NAME-PRECONDITIONS-EFFECTS)")
+    root, text="FORMAT: Name-pred(C)--pred(C, F); pred(D, F)-pred(D) pred(D, F)-pred(F)-" + 
+    "\nName-pos preconditions-neg preconditions-pos effects-neg effects")
 format4.place(x=20, y=380)
 
 
