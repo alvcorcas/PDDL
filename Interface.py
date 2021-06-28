@@ -2,30 +2,16 @@ import tkinter as tk
 from tkinter import Tk, Label, Canvas, Entry, Button, BooleanVar, Checkbutton
 from State import State
 from Action import Action
-import Heuristics as heur
-import Search as search
+import Backward_search as bs
+import Forward_search as fs
 import Test as test
 import time as tm
 from time import time
-
-# El formato para las acciones es A-p2-p4;B-p4-p5;C-p1-p2;D-p1,p4,p5-p3;E-p5,p2-p3;F-p1,p4-p3
-# Es decir NOMBRE-PRECOND-EFECTOS
-# Para el estado inicial y objetivo, el formato es literales separados por coma
-
-
-# CAMPU
-# p1,p3,p4,p9
-# p20,p7,p19
-# A-p6-p18,p8;B-p4-p20,p14,p16;C-p18,p20-p5;D-p7,p3-p6;E-p1-p7,p2;F-p5-p10,p13;G-p9,p13,p12-p11,p19;H-p14,p8-p12;I-p2,p19,p16-p15;J-p15-p21
-#[B, E, D, A, C, F, H, G, I, J]
-#[E, D, B, A, H, C, F, G, I, J]
-
 
 initial_state = []
 target = []
 actions = set()
 data = []
-
 
 def cargardata(data):
 
@@ -93,17 +79,17 @@ def resultado():
     begin = tm.time()
     if (chk_state_prego.get()):
         if(chk_state_backwards.get()):
-            text['text'] = search.backward_search_prego(
+            text['text'] = bs.backward_search_prego(
                 State(initial_state), State(target), actions)
         else:
-            text['text'] = search.forward_search_prego(
+            text['text'] = fs.forward_search_prego(
                 State(initial_state), State(target), actions)
     else:
         if(chk_state_backwards.get()):
-            text['text'] = search.backward_search_delta0(
+            text['text'] = bs.backward_search_delta0(
                 State(initial_state), State(target), actions)
         else:
-            text['text'] = search.forward_search_delta0(
+            text['text'] = fs.forward_search_delta0(
                 State(initial_state), State(target), actions)
     end = tm.time()
     text2['text'] = f'{end - begin} seconds'
